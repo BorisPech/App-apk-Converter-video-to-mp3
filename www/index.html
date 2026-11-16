@@ -2,94 +2,135 @@
 <html lang="km">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>វីដេអូ ទៅ MP3</title>
 <style>
-:root{--bg:#f3f5f9;--card:#fff;--ink:#1e2433;--mute:#667085;--line:#e4e8f0;--field:#f6f8fb;--accent:#3f66e0;--accent-h:#3257c9;--on:#fff;--tint:#eaf0ff;--ok:#1f9d6b;--okt:#e6f6ef;--bad:#c0392b;--shadow:0 1px 2px rgba(20,30,60,.05),0 12px 32px -16px rgba(20,30,60,.18);color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#141922;--card:#1b212d;--ink:#e8ecf4;--mute:#97a1b5;--line:#2a3242;--field:#171c26;--accent:#7b97f2;--accent-h:#93abf6;--on:#101733;--tint:#222c47;--ok:#4cc794;--okt:#173328;--bad:#ff8c7a;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -16px rgba(0,0,0,.6);color-scheme:dark}}
-*{box-sizing:border-box}
-body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font:16px/1.7 "Kantumruy Pro","Noto Sans Khmer","Khmer UI","Leelawadee UI",system-ui,-apple-system,"Segoe UI",sans-serif;padding:0 16px 48px}
-.top{flex-wrap:wrap;max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700}
-.logo{width:36px;height:36px;border-radius:10px;background:var(--accent);display:grid;place-items:center}
-.badge{font-size:13px;color:var(--mute);display:flex;align-items:center;gap:6px}
-.badge:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok)}
-main{max-width:760px;margin:0 auto}
-.hero{padding:18px 0 26px}
-h1{margin:0;font-size:clamp(28px,5.5vw,40px);line-height:1.35;font-weight:800}
-.hero p{margin:8px 0 0;color:var(--mute);max-width:52ch}
-.card{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px}
-#drop{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;border:1.5px dashed var(--line);background:var(--field);border-radius:14px;padding:34px 16px;cursor:pointer;transition:.15s}
+:root{
+--bg:#f4f5fb;--card:#fff;--ink:#151a2e;--mute:#667088;--line:#e5e8f1;--field:#f2f4fa;
+--accent:#5468f4;--accent2:#8b5cf6;--on:#fff;--tint:#edf0ff;
+--ok:#0f8f5c;--okt:#e2f6ec;--okb:#b6e5cf;--bad:#d1432f;--badt:#fdecea;
+--glow:rgba(84,104,244,.14);--dock:rgba(244,245,251,.9);
+--shadow:0 1px 2px rgba(20,28,60,.05),0 14px 34px -18px rgba(20,28,60,.24);
+--sat:max(env(safe-area-inset-top,0px),var(--safe-area-inset-top,0px),var(--fb-top,0px));
+--sab:max(env(safe-area-inset-bottom,0px),var(--safe-area-inset-bottom,0px),var(--fb-bottom,0px));
+--sal:max(env(safe-area-inset-left,0px),var(--safe-area-inset-left,0px));
+--sar:max(env(safe-area-inset-right,0px),var(--safe-area-inset-right,0px));
+color-scheme:light}
+@media (prefers-color-scheme:dark){:root{
+--bg:#0e1118;--card:#171b26;--ink:#eef1f8;--mute:#9aa3b8;--line:#272d3d;--field:#121620;
+--accent:#7d8dff;--accent2:#a78bfa;--on:#0b0f24;--tint:#202643;
+--ok:#48d59a;--okt:#11302a;--okb:#1c5442;--bad:#ff8d7b;--badt:#3a1e1b;
+--glow:rgba(125,141,255,.16);--dock:rgba(14,17,24,.9);
+--shadow:0 1px 2px rgba(0,0,0,.3),0 14px 34px -18px rgba(0,0,0,.7);color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;overflow-x:hidden;color:var(--ink);
+background:radial-gradient(120% 55% at 50% -8%,var(--glow),transparent 62%),var(--bg);
+font:16px/1.7 "Kantumruy Pro","Noto Sans Khmer","Khmer UI","Leelawadee UI",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+padding:0 var(--sar) 0 var(--sal);overflow-wrap:anywhere}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(var(--sat) + 14px) 0 6px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;min-width:0}
+.brand span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo{flex:none;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;box-shadow:0 8px 18px -8px var(--accent)}
+.badge{flex:none;font-size:12px;color:var(--mute);display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+.badge:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok)}
+@media (max-width:370px){.badge{display:none}}
+.hero{padding:22px 0 18px}
+h1{margin:0;font-size:clamp(24px,7.2vw,34px);line-height:1.5;font-weight:800}
+.hero p{margin:6px 0 0;color:var(--mute);font-size:15px;line-height:1.75}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:14px}
+#drop{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;border:1.5px dashed var(--line);background:var(--field);border-radius:16px;padding:26px 16px 24px;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;position:relative}
+#drop:active{transform:scale(.99)}
 #drop:hover,#drop.over,#drop:focus-within{border-color:var(--accent);background:var(--tint)}
-#drop svg{color:var(--accent)}
-#drop b{font-size:18px}
-#drop small{color:var(--mute);font-size:14px}
+.upic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;color:var(--on);background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 22px -10px var(--accent);margin-bottom:8px}
+#drop b{font-size:18px;line-height:1.5}
+#drop small{color:var(--mute);font-size:13.5px;line-height:1.6}
 #file{position:absolute;opacity:0;width:1px;height:1px}
-.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:16px}
-.lbl{font-size:14px;color:var(--mute);margin-right:8px}
-.seg{display:inline-flex;background:var(--field);border:1px solid var(--line);border-radius:10px;padding:3px}
-.seg button{border:0;background:none;color:var(--mute);font:inherit;font-size:14px;padding:4px 12px;border-radius:8px;cursor:pointer}
-.seg button[aria-pressed=true]{background:var(--card);color:var(--accent);font-weight:700;box-shadow:0 1px 3px rgba(20,30,60,.15)}
-.btns{display:flex;gap:8px}
-.btn{font:inherit;font-weight:700;border:0;border-radius:10px;padding:9px 20px;cursor:pointer;background:var(--accent);color:var(--on);transition:background .15s}
-.btn:hover:not(:disabled){background:var(--accent-h)}
-.btn.ghost{background:none;color:var(--mute);border:1px solid var(--line);font-weight:500}
-.btn:disabled{opacity:.45;cursor:not-allowed}
+.qh{display:flex;align-items:baseline;justify-content:space-between;margin:18px 4px 8px}
+.lbl{font-size:14px;font-weight:700}
+.unit{font-size:12.5px;color:var(--mute)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--field);border:1px solid var(--line);border-radius:14px;padding:4px}
+.seg button{border:0;background:none;color:var(--mute);font:inherit;font-size:15px;font-weight:600;min-height:44px;border-radius:10px;cursor:pointer;transition:background .15s,color .15s}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--accent);font-weight:800;box-shadow:0 1px 5px rgba(20,28,60,.2)}
+main{padding-bottom:calc(104px + var(--sab))}
+.btn{font:inherit;font-weight:800;font-size:16px;min-height:52px;border:0;border-radius:15px;padding:0 22px;cursor:pointer;color:var(--on);background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 22px -12px var(--accent);transition:transform .1s,opacity .15s}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn.ghost{background:var(--card);color:var(--mute);border:1px solid var(--line);font-weight:600;box-shadow:none}
+.btn:disabled{opacity:.42;cursor:not-allowed;box-shadow:none}
+.btn{white-space:nowrap}
+@media (max-width:380px){.btn{font-size:15px;padding:0 14px}.dock-in{gap:8px}#clear{padding:0 12px}}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--dock);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.dock-in{max-width:600px;margin:0 auto;display:flex;gap:10px;padding:12px max(16px,var(--sar)) calc(12px + var(--sab)) max(16px,var(--sal))}
+#go{flex:1}
 #list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
-#list:not(:empty){margin-top:18px}
-.item{min-width:0;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}
-.head{display:flex;gap:10px;justify-content:space-between;align-items:flex-start}
-.meta{min-width:0}
-.name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
-.sub{color:var(--mute);font-size:13px}
-.item.done .sub{color:var(--ok)}
+#list:not(:empty){margin-top:14px}
+.item{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;box-shadow:var(--shadow);animation:pop .22s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.item.err{border-color:var(--bad);background:linear-gradient(var(--badt),var(--badt)),var(--card)}
+.head{display:flex;gap:12px;align-items:center}
+.ico{flex:none;width:44px;height:44px;border-radius:13px;background:var(--tint);color:var(--accent);display:grid;place-items:center}
+.item.done .ico{background:var(--okt);color:var(--ok)}
+.meta{flex:1;min-width:0}
+.name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;font-size:15.5px;line-height:1.5}
+.sub{display:block;color:var(--mute);font-size:13px;line-height:1.55}
+.item.done .sub{color:var(--ok);font-weight:600}
 .item.err .sub{color:var(--bad)}
-.x{border:0;background:none;color:var(--mute);font-size:22px;line-height:1;cursor:pointer;padding:0 8px;border-radius:8px}
-canvas{display:none;width:100%;max-width:100%;height:40px;margin-top:10px}
+.x{flex:none;width:40px;height:40px;border:0;background:none;color:var(--mute);font-size:26px;line-height:1;cursor:pointer;border-radius:12px}
+.x:active{background:var(--field)}
+canvas{display:none;width:100%;max-width:100%;height:56px;margin-top:12px}
 .item.done canvas{display:block}
-.bar{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:10px}
-.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .15s}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .15s}
 .item.done .bar,.item.err .bar{display:none}
-.act{display:none;gap:10px 14px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.act{display:none;flex-direction:column;gap:10px;margin-top:12px}
 .item.done .act{display:flex}
-.pl{display:flex;align-items:center;gap:10px;flex:1 1 220px;min-width:0;background:var(--field);border:1px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px}
-.pp{width:34px;height:34px;border-radius:50%;border:0;background:var(--accent);color:var(--on);display:grid;place-items:center;cursor:pointer;flex:none}
-.sk{flex:1;min-width:40px;width:100%;accent-color:var(--accent)}
+.pl{display:flex;align-items:center;gap:10px;background:var(--field);border:1px solid var(--line);border-radius:999px;padding:5px 16px 5px 5px;min-width:0}
+.pp{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--on);display:grid;place-items:center;cursor:pointer}
+.sk{-webkit-appearance:none;appearance:none;flex:1;min-width:40px;width:100%;height:28px;margin:0;background:transparent}
+.sk::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:var(--line)}
+.sk::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);margin-top:-7px;border:3px solid var(--card);box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.sk::-moz-range-track{height:6px;border-radius:6px;background:var(--line)}
+.sk::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--card)}
 .tm{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
-.dl{background:var(--okt);color:var(--ok);text-decoration:none;font-weight:700;padding:8px 16px;border-radius:10px;border:1px solid transparent}
-.dl:hover{border-color:var(--ok)}
-.dl{flex:none;text-align:center}
-@media (max-width:520px){.dl{flex:1 1 100%}.row .btns{width:100%}.row .btn{flex:1}}
-.note{margin:22px 4px 0;color:var(--mute);font-size:13px;text-align:center}
+.dl{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;background:var(--okt);color:var(--ok);text-decoration:none;font-weight:800;border-radius:14px;border:1px solid var(--okb)}
+.dl:active{filter:brightness(.95)}
+.dl:before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19.5h14'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 19.5h14'/%3E%3C/svg%3E") center/contain no-repeat}
+.note{margin:20px 6px 0;color:var(--mute);font-size:12.5px;line-height:1.7;text-align:center}
+@media (min-width:700px){.wrap{padding:0 24px}.hero{padding-top:34px}#drop{padding:38px 20px 34px}}
+@media (max-height:480px) and (orientation:landscape){.hero{padding:8px 0 12px}.upic{display:none}#drop{padding:16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="top">
-  <div class="brand"><span class="logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="#fff"><rect x="2" y="8" width="2.4" height="4" rx="1.2"/><rect x="6.4" y="4" width="2.4" height="12" rx="1.2"/><rect x="10.8" y="6" width="2.4" height="8" rx="1.2"/><rect x="15.2" y="9" width="2.4" height="2" rx="1"/></svg></span>វីដេអូ ទៅ MP3</div>
-  <div class="badge">ដំណើរការក្នុងឧបករណ៍អ្នក</div>
-</div>
-<main>
-  <section class="hero">
-    <h1>បម្លែងវីដេអូទៅជាសំឡេង MP3</h1>
-    <p>ឯកសារមិនត្រូវបានផ្ទុកឡើងទៅណាទេ។ គ្មានម៉ាស៊ីនមេ គ្មានមូលដ្ឋានទិន្នន័យ ហើយដំណើរការបានទោះគ្មានអ៊ីនធឺណិត។</p>
-  </section>
-  <section class="card">
-    <label id="drop">
-      <input type="file" id="file" accept="video/*,audio/*,.mkv,.avi,.flv,.wmv,.3gp,.mts,.ts" multiple>
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
-      <b>ទម្លាក់វីដេអូនៅទីនេះ ឬចុចដើម្បីជ្រើសរើស</b>
-      <small>អាចជ្រើសបានច្រើនឯកសារក្នុងពេលតែមួយ</small>
-    </label>
-    <div class="row">
-      <div><span class="lbl">គុណភាព</span><span class="seg" id="q" role="group" aria-label="គុណភាពសំឡេង">
-        <button aria-pressed="false" data-k="128">128</button><button aria-pressed="true" data-k="192">192</button><button aria-pressed="false" data-k="256">256</button><button aria-pressed="false" data-k="320">320 kbps</button></span></div>
-      <div class="btns"><button class="btn ghost" id="clear" disabled>លុបបញ្ជី</button><button class="btn" id="go" disabled>បម្លែងទៅ MP3</button></div>
-    </div>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 20 20" fill="#fff"><rect x="2" y="8" width="2.4" height="4" rx="1.2"/><rect x="6.4" y="4" width="2.4" height="12" rx="1.2"/><rect x="10.8" y="6" width="2.4" height="8" rx="1.2"/><rect x="15.2" y="9" width="2.4" height="2" rx="1"/></svg></span><span>វីដេអូ ទៅ MP3</span></div>
+    <div class="badge">ដំណើរការក្នុងឧបករណ៍</div>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>បម្លែងវីដេអូទៅជាសំឡេង MP3</h1>
+      <p>ឯកសារមិនត្រូវបានផ្ទុកឡើងទៅណាទេ ហើយដំណើរការបានទោះគ្មានអ៊ីនធឺណិត។</p>
+    </section>
+    <section class="card">
+      <label id="drop">
+        <input type="file" id="file" accept="video/*,audio/*,.mkv,.avi,.flv,.wmv,.3gp,.mts,.ts" multiple>
+        <span class="upic" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></span>
+        <b>ជ្រើសរើសវីដេអូ</b>
+        <small>ចុចទីនេះ ឬទម្លាក់ឯកសារ · អាចជ្រើសបានច្រើន</small>
+      </label>
+      <div class="qh"><span class="lbl">គុណភាពសំឡេង</span><span class="unit">kbps</span></div>
+      <div class="seg" id="q" role="group" aria-label="គុណភាពសំឡេង">
+        <button aria-pressed="false" data-k="128">128</button><button aria-pressed="true" data-k="192">192</button><button aria-pressed="false" data-k="256">256</button><button aria-pressed="false" data-k="320">320</button>
+      </div>
+    </section>
     <ul id="list"></ul>
-  </section>
-  <p class="note">ទម្រង់ដែលគាំទ្រអាស្រ័យលើកម្មវិធីរុករករបស់អ្នក (MP4, WebM, MOV, M4V, OGG ជាដើម)។</p>
-</main>
+    <p class="note">ទម្រង់ដែលគាំទ្រអាស្រ័យលើឧបករណ៍របស់អ្នក (MP4, WebM, MOV, M4V, OGG ជាដើម)។</p>
+  </main>
+</div>
+<div class="dock"><div class="dock-in"><button class="btn ghost" id="clear" disabled>លុបបញ្ជី</button><button class="btn" id="go" disabled>បម្លែងទៅ MP3</button></div></div>
 
 <script>function lamejs(){function X(c){return new Int32Array(c)}function K(c){return new Float32Array(c)}function ca(c){if(1==c.length)return K(c[0]);var k=c[0];c=c.slice(1);for(var n=[],u=0;u<k;u++)n.push(ca(c));return n}function Ia(c){if(1==c.length)return X(c[0]);var k=c[0];c=c.slice(1);for(var n=[],u=0;u<k;u++)n.push(Ia(c));return n}function dc(c){if(1==c.length)return new Int16Array(c[0]);var k=c[0];c=c.slice(1);for(var n=[],u=0;u<k;u++)n.push(dc(c));return n}function Ob(c){if(1==c.length)return Array(c[0]);
 var k=c[0];c=c.slice(1);for(var n=[],u=0;u<k;u++)n.push(Ob(c));return n}function ra(c){this.ordinal=c}function G(c){this.ordinal=c}function la(c){this.ordinal=function(){return c}}function mc(){this.getLameVersion=function(){return"3.98.4"};this.getLameShortVersion=function(){return"3.98.4"};this.getLameVeryShortVersion=function(){return"LAME3.98r"};this.getPsyVersion=function(){return"0.93"};this.getLameUrl=function(){return"http://www.mp3dev.org/"};this.getLameOsBitness=function(){return"32bits"}}
@@ -417,7 +458,7 @@ function release(it){if(it.stop)it.stop();if(it.url)URL.revokeObjectURL(it.url);
 function add(files){
   for(const f of files){
     const li=document.createElement('li');li.className='item';
-    li.innerHTML='<div class="head"><div class="meta"><span class="name"></span><span class="sub"></span></div><button class="x" aria-label="លុប">×</button></div><canvas width="660" height="40"></canvas><div class="bar"><i></i></div><div class="act"></div>';
+    li.innerHTML='<div class="head"><span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span><div class="meta"><span class="name"></span><span class="sub"></span></div><button class="x" aria-label="លុប">×</button></div><canvas width="660" height="56"></canvas><div class="bar"><i></i></div><div class="act"></div>';
     li.querySelector('.name').textContent=f.name;
     const it={file:f,li,state:'wait',url:null,buf:null};
     li.querySelector('.x').onclick=()=>{if(it.state==='work')return;release(it);li.remove();items=items.filter(x=>x!==it);sync()};
@@ -452,7 +493,7 @@ function player(it,el){
 }
 
 const peaks=(ch,n)=>{const o=[],step=Math.floor(ch.length/n)||1;for(let i=0;i<n;i++){let m=0;for(let j=i*step;j<Math.min((i+1)*step,ch.length);j+=Math.ceil(step/64)){const v=Math.abs(ch[j]);if(v>m)m=v}o.push(m)}return o};
-function draw(cv,p){const c=cv.getContext('2d'),w=cv.width,h=cv.height,bw=w/p.length;c.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();p.forEach((v,i)=>{const bh=Math.max(3,v*h*.95);c.beginPath();c.roundRect(i*bw+1,(h-bh)/2,Math.max(2,bw-3),bh,2);c.fill()})}
+function draw(cv,p){const c=cv.getContext('2d'),w=cv.width,h=cv.height,bw=w/p.length;c.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();p.forEach((v,i)=>{const bh=Math.max(3,v*h*.95);c.beginPath();c.roundRect(i*bw+1,(h-bh)/2,Math.max(3,bw-4),bh,4);c.fill()})}
 const i16=f=>{const o=new Int16Array(f.length);for(let i=0;i<f.length;i++){const s=Math.max(-1,Math.min(1,f[i]));o[i]=s<0?s*32768:s*32767}return o};
 
 // Extract AAC audio from MP4/MOV/M4A and wrap it as ADTS so Safari/iOS can decode it
@@ -540,7 +581,7 @@ async function convert(it){
     player(it,act);
     it.state='done';it.li.classList.add('done');
     status(it,'រួចរាល់ · '+fmt(blob.size));
-    draw(it.li.querySelector('canvas'),peaks(L,110));
+    draw(it.li.querySelector('canvas'),peaks(L,56));
   }catch(e){
     it.state='err';it.li.classList.add('err');
     status(it,'មិនអាចស្រង់សំឡេងបានទេ។ កម្មវិធីរុករកមិនគាំទ្រទម្រង់នេះ ឬឯកសារគ្មានសំឡេង។');
@@ -561,17 +602,28 @@ $('#q').onclick=e=>{const b=e.target.closest('button');if(!b)return;kbps=+b.data
 })();
 </script>
 <script>
-// Android (Capacitor) support: WebView cannot save blob downloads, so save through native plugins.
+// Android (Capacitor) support
 (()=>{
 const C=window.Capacitor;
 if(!C||!C.isNativePlatform||!C.isNativePlatform())return;
+const root=document.documentElement;
 const fi=document.getElementById('file');if(fi)fi.accept='video/*,audio/*';
+// If the system bars overlap the page and no inset values were provided, add safe fallbacks.
+const probe=document.createElement('div');
+probe.style.cssText='position:absolute;visibility:hidden;padding-top:max(env(safe-area-inset-top,0px),var(--safe-area-inset-top,0px))';
+document.body.appendChild(probe);
+setTimeout(()=>{
+  const t=parseFloat(getComputedStyle(probe).paddingTop)||0;
+  if(t<1&&Math.abs(screen.height-innerHeight)<10){root.style.setProperty('--fb-top','28px');root.style.setProperty('--fb-bottom','40px')}
+  probe.remove();
+},700);
+// Save MP3 through native plugins (WebView cannot save blob downloads)
 document.addEventListener('click',async e=>{
   const a=e.target.closest&&e.target.closest('a.dl');if(!a)return;
   e.preventDefault();
   if(a.dataset.busy)return;a.dataset.busy='1';
   const label=a.textContent;
-  const name=(a.download||'audio.mp3').replace(/[\\/:*?"<>|]/g,'_');
+  const name=(a.download||'audio.mp3').replace(/[\\\/:*?"<>|]/g,'_');
   const {Filesystem,Share}=C.Plugins;
   try{
     a.textContent='កំពុងរក្សាទុក…';
